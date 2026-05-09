@@ -13,7 +13,7 @@ import ttsRouter from "./routes/tts.route.js"
 
 const app = express()
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true
 }))
 
