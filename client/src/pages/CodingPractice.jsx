@@ -8,6 +8,7 @@ import {
   BsClockFill, BsChevronRight, BsTerminal, BsListUl,
   BsArrowRepeat, BsLightningChargeFill
 } from 'react-icons/bs';
+import { ServerUrl } from '../App';
 
 const COMPANIES = [
   { id: 'google', name: 'Google' },
@@ -90,7 +91,7 @@ export default function CodingPractice() {
   // ── Fetch questions ────────────────────────────────────
   useEffect(() => {
     setLoadingQ(true);
-    axios.get(`http://localhost:8000/api/questions?company=${selectedCompany}`, { withCredentials: true })
+    axios.get(`${ServerUrl}/api/questions?company=${selectedCompany}`, { withCredentials: true })
       .then(res => {
         const qs = res.data.questions || [];
         setQuestions(qs);
@@ -149,7 +150,7 @@ export default function CodingPractice() {
     setActiveTab('results');
 
     try {
-      const res = await axios.post('http://localhost:8000/api/questions/run', {
+      const res = await axios.post(`${ServerUrl}/api/questions/run`, {
         questionId: currentQ._id,
         language: selectedLang,
         code,
