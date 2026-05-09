@@ -1,0 +1,29 @@
+import express from "express"
+import isAuth from "../middlewares/isAuth.js"
+import { upload } from "../middlewares/multer.js"
+import { analyzeResume, finishInterview, generateQuestion, getInterviewReport, getMyInterviews, submitAnswer, uploadVideo } from "../controllers/interview.controller.js"
+
+
+
+
+const interviewRouter = express.Router()
+
+interviewRouter.post("/resume", isAuth, (req, res, next) => {
+  upload.single("resume")(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ message: err.message });
+    }
+    next();
+  });
+}, analyzeResume)
+interviewRouter.post("/generate-questions",isAuth,generateQuestion)
+interviewRouter.post("/submit-answer",isAuth,submitAnswer)
+interviewRouter.post("/finish",isAuth,finishInterview)
+interviewRouter.post("/upload-video",isAuth,upload.single("video"),uploadVideo)
+
+interviewRouter.get("/get-interview",isAuth,getMyInterviews)
+interviewRouter.get("/report/:id",isAuth,getInterviewReport)
+
+
+
+export default interviewRouter
