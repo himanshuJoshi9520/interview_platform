@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import Auth from './pages/auth'
+import Auth from './pages/Auth'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ import Pricing from './pages/Pricing'
 import InterviewReport from './pages/InterviewReport'
 import CodingPractice from './pages/CodingPractice'
 
-export const ServerUrl = "http://localhost:8000"
+export const ServerUrl = import.meta.env.VITE_API_URL || "http://localhost:8000"
 
 function App() {
 
